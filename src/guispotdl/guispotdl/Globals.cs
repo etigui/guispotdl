@@ -25,6 +25,9 @@ namespace guispotdl
         // Playlist file extention
         public const string extTxt = ".txt";
 
+        // Overwrite same song
+        public const string argOverwriteSkip = "--overwrite skip";
+
         // Write tracks from Spotify playlist, album, etc. to this file(default: None)
         public const string argWriteTo = "--write-to";
 

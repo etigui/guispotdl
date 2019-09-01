@@ -169,7 +169,7 @@ namespace guispotdl
             foreach (string urlSong in urlSongs)
             {
                 ProcessStatusEvent($"downloading ({count}/{urlSongs.Count()})...");
-                ExecProcess(Globals.spotdlPath, $"{Globals.argSong} {urlSong} {Globals.argFolder} {"\""}{downloadPath}{"\""}");
+                ExecProcess(Globals.spotdlPath, $"{Globals.argSong} {urlSong} {Globals.argFolder} {"\""}{downloadPath}{"\""} {Globals.argOverwriteSkip}");
                 count++;
             }
         }
