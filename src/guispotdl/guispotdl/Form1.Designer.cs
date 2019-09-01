@@ -41,6 +41,7 @@
             // 
             // BT_download
             // 
+            this.BT_download.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BT_download.Location = new System.Drawing.Point(617, 24);
             this.BT_download.Name = "BT_download";
             this.BT_download.Size = new System.Drawing.Size(90, 28);
@@ -51,6 +52,8 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 30);
             this.label1.Name = "label1";
@@ -60,6 +63,8 @@
             // 
             // TB_id
             // 
+            this.TB_id.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TB_id.Location = new System.Drawing.Point(51, 27);
             this.TB_id.Name = "TB_id";
             this.TB_id.Size = new System.Drawing.Size(420, 22);
@@ -69,6 +74,7 @@
             // 
             // CB_type
             // 
+            this.CB_type.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CB_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CB_type.FormattingEnabled = true;
             this.CB_type.Items.AddRange(new object[] {
@@ -82,6 +88,9 @@
             // 
             // TB_console
             // 
+            this.TB_console.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TB_console.BackColor = System.Drawing.Color.Black;
             this.TB_console.ForeColor = System.Drawing.Color.White;
             this.TB_console.Location = new System.Drawing.Point(15, 67);
