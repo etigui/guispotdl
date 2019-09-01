@@ -130,7 +130,7 @@
             this.Controls.Add(this.BT_download);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Music downloader (Spotify)";
+            this.Text = "Music downloader (Spotify/Youtube)";
             this.SS_status.ResumeLayout(false);
             this.SS_status.PerformLayout();
             this.ResumeLayout(false);
