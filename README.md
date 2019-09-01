@@ -4,9 +4,9 @@ Downloads songs from YouTube in MP3 format by using Spotify's HTTP link.
 
 # Download
 Download the new pre-release [here](https://github.com/etigui/guispotdl/releases). You must take the following program to make it works:
-- guispotdl.exe (GUI to make it easier)
-- spotdl.exe (get metadata and download song from YouTube)
-- ffmpeg.exe (convert to MP3)
+- ``guispotdl.exe`` (GUI to make it easier)
+- ``spotdl.exe`` (get metadata and download song from YouTube)
+- ``ffmpeg.exe`` (convert to MP3)
 
 # Usage
 Run the program ``guispotdl.exe`` and provide the Spotify's playlist or song ID, then click on Download.
