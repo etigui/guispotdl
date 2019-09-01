@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.BT_download = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.tb_id = new System.Windows.Forms.TextBox();
+            this.TB_id = new System.Windows.Forms.TextBox();
             this.CB_type = new System.Windows.Forms.ComboBox();
             this.TB_console = new System.Windows.Forms.TextBox();
             this.SS_status = new System.Windows.Forms.StatusStrip();
@@ -58,13 +58,14 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "ID : ";
             // 
-            // tb_id
+            // TB_id
             // 
-            this.tb_id.Location = new System.Drawing.Point(51, 27);
-            this.tb_id.Name = "tb_id";
-            this.tb_id.Size = new System.Drawing.Size(420, 22);
-            this.tb_id.TabIndex = 2;
-            this.tb_id.Text = "3JrASLN8NI6jmnn6T8R0Nr";
+            this.TB_id.Location = new System.Drawing.Point(51, 27);
+            this.TB_id.Name = "TB_id";
+            this.TB_id.Size = new System.Drawing.Size(420, 22);
+            this.TB_id.TabIndex = 2;
+            this.TB_id.Text = "2DGa7iaidT5s0qnINlwMjJ";
+            this.TB_id.TextChanged += new System.EventHandler(this.TB_id_TextChanged);
             // 
             // CB_type
             // 
@@ -115,7 +116,7 @@
             this.Controls.Add(this.SS_status);
             this.Controls.Add(this.TB_console);
             this.Controls.Add(this.CB_type);
-            this.Controls.Add(this.tb_id);
+            this.Controls.Add(this.TB_id);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BT_download);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -132,7 +133,7 @@
 
         private System.Windows.Forms.Button BT_download;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tb_id;
+        private System.Windows.Forms.TextBox TB_id;
         private System.Windows.Forms.ComboBox CB_type;
         private System.Windows.Forms.TextBox TB_console;
         private System.Windows.Forms.StatusStrip SS_status;

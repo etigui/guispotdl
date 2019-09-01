@@ -12,21 +12,31 @@ namespace guispotdl
 {
     class Download
     {
+        #region Vars
 
         private string output;
         private string id;
         private bool playlist;
+        public event EventHandler<StatusEventArgs> StatusEventHandler;
+        public event EventHandler<OutputEventArgs> OutputEventHandler;
+
         public string Output { get => output; set => output = value; }
         public string Id { set => id = value; }
         public bool Playlist { get => playlist; set => playlist = value; }
+        #endregion
 
-        public event EventHandler<StatusEventArgs> StatusEventHandler;
-        public event EventHandler<OutputEventArgs> OutputEventHandler;
+        #region Construct
 
         public Download()
         {
         }
+        #endregion
 
+        #region Start download
+
+        /// <summary>
+        /// Start downloading song
+        /// </summary>
         public void Start()
         {
             CheckUp();
@@ -41,57 +51,6 @@ namespace guispotdl
             bw.RunWorkerCompleted += BW_RunWorkerCompleted;
             bw.ProgressChanged += BW_ProgressChanged;
             bw.RunWorkerAsync();
-        }
-
-        
-
-        void BW_DoWork(object sender, DoWorkEventArgs e)
-        {
-            // Send "start download event" to main form
-            StatusEventArgs arg = new StatusEventArgs
-            {
-                Status = "downloading..."
-            };
-            StatusEvent(arg);
-
-            List<string> urlSongs = new List<string>();
-
-            if (playlist)
-            {
-                urlSongs = GetPlaylistSongs();
-            }else
-            {
-                urlSongs.Add($"https://open.spotify.com/track/{id}");
-            }
-            DownloadSong(urlSongs);
-        }
-
-        private void BW_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            //resultLabel.Text = (e.ProgressPercentage.ToString() + "%");
-        }
-
-        void BW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            // Send "end download event" to main form
-            StatusEventArgs arg = new StatusEventArgs
-            {
-                Status = "terminated"
-            };
-            StatusEvent(arg);
-        }
-
-
-        protected virtual void StatusEvent(StatusEventArgs e)
-        {
-            EventHandler<StatusEventArgs> handler = StatusEventHandler;
-            StatusEventHandler?.Invoke(this, e);
-        }
-
-        protected virtual void OutputEvent(OutputEventArgs e)
-        {
-            EventHandler<OutputEventArgs> handler = OutputEventHandler;
-            OutputEventHandler?.Invoke(this, e);
         }
 
         /// <summary>
@@ -118,14 +77,68 @@ namespace guispotdl
             // Check if ffmpeg and spotdl prog exist
             if (!File.Exists(Globals.spotdlPath))
             {
-                ProcessOutput("spotdl.exe not exist");
+                ProcessOutputEvent("spotdl.exe not exist");
             }
             if (!File.Exists(Globals.ffmpegPath))
             {
-                ProcessOutput("ffmpeg.exe not exist");
+                ProcessOutputEvent("ffmpeg.exe not exist");
             }
         }
+        #endregion
 
+        #region BackgroundWorker
+
+        /// <summary>
+        /// BackgroundWorker "start downloading"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void BW_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // Send "start download event" to main form
+            ProcessStatusEvent("downloading...");
+
+            // Check to download playlist or song
+            List<string> urlSongs = new List<string>();
+            if (playlist)
+            {
+                urlSongs = GetPlaylistSongs();
+            }else
+            {
+                urlSongs.Add($"https://open.spotify.com/track/{id}");
+            }
+            DownloadSong(urlSongs);
+        }
+
+        /// <summary>
+        /// BackgroundWorker "progress changed"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BW_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //resultLabel.Text = (e.ProgressPercentage.ToString() + "%");
+        }
+
+        /// <summary>
+        /// BackgroundWorker "run completed"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void BW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // Send "end download event" to main form
+            ProcessStatusEvent("terminated");
+        }
+        #endregion
+
+        #region Download song/playlist
+
+        /// <summary>
+        /// Download song url from playlist >> playlist.txt
+        /// Extract song url from playlist.txt file
+        /// </summary>
+        /// <returns></returns>
         private List<string> GetPlaylistSongs()
         {
 
@@ -140,19 +153,36 @@ namespace guispotdl
             return new List<string>();
         }
 
+        /// <summary>
+        /// Download all songs from the url list
+        /// </summary>
+        /// <param name="urlSongs"></param>
         private void DownloadSong(List<string> urlSongs)
-        {
+        {   
+            // Create a new directory to store all the song
+            DateTime date = DateTime.Now;
+            string downloadPath = Path.Combine(Globals.downloadPath, $"{date.ToString("ddMMyyyyHHmmss")}_{id}");
+            Directory.CreateDirectory(downloadPath);
+
+            // Download all song
+            int count = 1;
             foreach (string urlSong in urlSongs)
             {
-                Console.WriteLine(urlSong);
+                ProcessStatusEvent($"downloading ({count}/{urlSongs.Count()})...");
+                ExecProcess(Globals.spotdlPath, $"{Globals.argSong} {urlSong} {Globals.argFolder} {"\""}{downloadPath}{"\""}");
+                count++;
             }
         }
 
+        /// <summary>
+        /// Run process
+        /// </summary>
+        /// <param name="prog"></param>
+        /// <param name="args"></param>
         private void ExecProcess(string prog, string args)
         {
-            ProcessOutput($"{prog}");
-            ProcessOutput($"{Environment.NewLine}");
-            ProcessOutput($"{args}");
+            ProcessOutputEvent($"{prog}");
+            ProcessOutputEvent($"{args}");
 
             ProcessStartInfo pInfo = new ProcessStartInfo()
             {
@@ -169,20 +199,46 @@ namespace guispotdl
                 StartInfo = pInfo,
             })
             {
-                process.OutputDataReceived += (ss, ee) => ProcessOutput(ee.Data);
-                process.ErrorDataReceived += (ss, ee) => ProcessOutput(ee.Data);
+                process.OutputDataReceived += (ss, ee) => ProcessOutputEvent(ee.Data);
+                process.ErrorDataReceived += (ss, ee) => ProcessOutputEvent(ee.Data);
                 process.Start();
                 process.BeginOutputReadLine();
                 process.BeginErrorReadLine();
                 process.WaitForExit();
             }
         }
+        #endregion
 
-        private void ProcessOutput(string output)
+        #region EventHandler fonction
+
+        /// <summary>
+        ///  Custom EventHandler for status messsage
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void StatusEvent(StatusEventArgs e)
+        {
+            EventHandler<StatusEventArgs> handler = StatusEventHandler;
+            StatusEventHandler?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Custom EventHandler for output console
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OutputEvent(OutputEventArgs e)
+        {
+            EventHandler<OutputEventArgs> handler = OutputEventHandler;
+            OutputEventHandler?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Follow "spotdl.exe" prog console output/error
+        /// </summary>
+        /// <param name="output"></param>
+        private void ProcessOutputEvent(string output)
         {
             if (!String.IsNullOrEmpty(output))
             {
-                // Follow "spotdl.exe" prog console output/error
                 OutputEventArgs arg = new OutputEventArgs
                 {
                     Output = output,
@@ -190,14 +246,35 @@ namespace guispotdl
                 OutputEvent(arg);
             }
         }
+
+        /// <summary>
+        /// Follow "download event" to main form
+        /// </summary>
+        /// <param name="status"></param>
+        private void ProcessStatusEvent(string status)
+        {
+            StatusEventArgs arg = new StatusEventArgs
+            {
+                Status = status,
+            };
+            StatusEvent(arg);
+        }
+        #endregion
     }
+
     #region EventArgs class
 
+    /// <summary>
+    /// Class to store status message
+    /// </summary>
     public class StatusEventArgs : EventArgs
     {
         public string Status { get; set; }
     }
 
+    /// <summary>
+    /// Class to store output message
+    /// </summary>
     public class OutputEventArgs : EventArgs
     {
         public string Output { get; set; }

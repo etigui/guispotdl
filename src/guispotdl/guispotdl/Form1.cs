@@ -33,11 +33,16 @@ namespace guispotdl
 
         #region Controls
 
+        /// <summary>
+        /// Start download playlist/song
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BT_download_Click(object sender, EventArgs e)
         {
             Download dl = new Download()
             {
-                Id = tb_id.Text,
+                Id = TB_id.Text,
                 Playlist = playlist
             };
             dl.StatusEventHandler += Download_StatusEventHandler;
@@ -45,6 +50,11 @@ namespace guispotdl
             dl.Start();
         }
 
+        /// <summary>
+        /// Select playlist/song to be downloaded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CB_type_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CB_type.Text == "Song")
@@ -54,6 +64,23 @@ namespace guispotdl
             else if (CB_type.Text == "Playlist")
             {
                 playlist = true;
+            }
+        }
+
+        /// <summary>
+        /// Check id
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TB_id_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(TB_id.Text) && TB_id.Text.Count() > 20)
+            {
+                BT_download.Enabled = true;
+            }
+            else
+            {
+                BT_download.Enabled = false;
             }
         }
         #endregion
@@ -82,7 +109,11 @@ namespace guispotdl
             }
         }
 
-        // Event handler to get output/error console (spotdl.exe) from "Download" class
+        /// <summary>
+        /// Event handler to get output/error console (spotdl.exe) from "Download" class
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Download_OutputEventHandler(object sender, OutputEventArgs e)
         {
             if (!String.IsNullOrEmpty(e.Output))
@@ -94,7 +125,10 @@ namespace guispotdl
 
         #region Controls invoke
 
-        // Tools bar status invoke
+        /// <summary>
+        /// Tools bar status invoke
+        /// </summary>
+        /// <param name="status"></param>
         private void InvokeTSSLStatus(string status)
         {
             if (TSSL_status.GetCurrentParent().InvokeRequired)
@@ -110,7 +144,10 @@ namespace guispotdl
             }
         }
 
-        // Button download invoke
+        /// <summary>
+        /// Button download invoke
+        /// </summary>
+        /// <param name="enable"></param>
         private void InvokeBTDownload(bool enable)
         {
             if (BT_download.InvokeRequired)
@@ -126,18 +163,23 @@ namespace guispotdl
             }
         }
 
-        // Textbox output invoke
+        /// <summary>
+        ///  Textbox output invoke
+        /// </summary>
+        /// <param name="output"></param>
         private void InvokeTBOutput(string output) {
             if (TB_console.InvokeRequired)
             {
                 this.Invoke(new MethodInvoker(delegate
                 {
-                    TB_console.Text = output;
+                    TB_console.AppendText(output);
+                    TB_console.AppendText(Environment.NewLine);
                 }));
             }
             else
             {
-                TB_console.Text = output;
+                TB_console.AppendText(output);
+                TB_console.AppendText(Environment.NewLine);
             }
         }
         #endregion
