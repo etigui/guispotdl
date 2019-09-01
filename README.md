@@ -9,10 +9,10 @@ Download the new pre-release [here](https://github.com/etigui/guispotdl/releases
 - ffmpeg.exe (convert to MP3)
 
 # Usage
-You provide the Spotify's playlist or song ID, then click on Download.
+Run the program "guispotdl.exe" and provide the Spotify's playlist or song ID, then click on Download.
 The song is going to be stored in the following path:
 
-	C:\Users\<username>\Music\guispotdl\<datetime-id>
+	C:\Users\<username>\Music\guispotdl\<datetime_id>
 
 # Disclaimer
 Downloading copyright songs may be illegal in your country. This tool is for educational purposes only and was created only to try:
