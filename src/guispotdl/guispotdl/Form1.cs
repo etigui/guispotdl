@@ -2,73 +2,144 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//this.ClientSize = new Size(633, 60);
+
 namespace guispotdl
 {
     public partial class Form1 : Form {
+
+        #region Vars
+
+        private bool playlist = false;
+        #endregion
+
+        #region Construct
+
         public Form1() {
             InitializeComponent();
 
-            // Resize form and select first item in checkbox
-            this.ClientSize = new Size(633, 60);
-            cb_type.SelectedIndex = 0;
+            // Select first item in checkbox
+            CB_type.SelectedIndex = 0;
         }
+        #endregion
 
-        private void Form1_Load(object sender, EventArgs e)
+        #region Controls
+
+        private void BT_download_Click(object sender, EventArgs e)
         {
-
-        }
-
-        // Change form size
-        private void cb_type_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cb_type.Text == "Song")
+            Download dl = new Download()
             {
-                this.ClientSize = new Size(633, 60);
+                Id = tb_id.Text,
+                Playlist = playlist
+            };
+            dl.StatusEventHandler += Download_StatusEventHandler;
+            dl.OutputEventHandler += Download_OutputEventHandler;
+            dl.Start();
+        }
 
+        private void CB_type_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CB_type.Text == "Song")
+            {
+                playlist = false;
             }
-            else if(cb_type.Text == "Playlist")
+            else if (CB_type.Text == "Playlist")
             {
-                this.ClientSize = new Size(633, 332);
+                playlist = true;
             }
         }
+        #endregion
 
-        // Move song from found to download
-        private void bt_add_Click(object sender, EventArgs e)
+        #region Download class event handler
+
+        /// <summary>
+        /// Event handler to get status message from "Download" class
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Download_StatusEventHandler(object sender, StatusEventArgs e)
         {
-            List<object> remove = new List<object>();
-            foreach (var item in lb_found.SelectedItems)
+            if (!String.IsNullOrEmpty(e.Status))
             {
-                if (!lb_download.Items.Contains(item))
+                InvokeTSSLStatus($"Status: {e.Status}");
+
+                if (e.Status == "terminated")
                 {
-                    lb_download.Items.Add(item);
-                    remove.Add(item);
+                    InvokeBTDownload(true);
+                }
+                else if (e.Status == "downloading...")
+                {
+                    InvokeBTDownload(false);
                 }
             }
-            foreach (var item in remove)
+        }
+
+        // Event handler to get output/error console (spotdl.exe) from "Download" class
+        private void Download_OutputEventHandler(object sender, OutputEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(e.Output))
             {
-                lb_found.Items.Remove(item);
+                InvokeTBOutput(e.Output);
+            }
+        }
+        #endregion
+
+        #region Controls invoke
+
+        // Tools bar status invoke
+        private void InvokeTSSLStatus(string status)
+        {
+            if (TSSL_status.GetCurrentParent().InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(delegate
+                {
+                    TSSL_status.Text = status;
+                }));
+            }
+            else
+            {
+                TSSL_status.Text = status;
             }
         }
 
-        // Move song from download to found
-        private void bt_remove_Click(object sender, EventArgs e)
+        // Button download invoke
+        private void InvokeBTDownload(bool enable)
         {
-            List<object> remove = new List<object>();
-            foreach (var item in lb_download.SelectedItems)
-            { 
-                lb_found.Items.Add(item);
-                remove.Add(item); 
-            }
-            foreach (var item in remove)
+            if (BT_download.InvokeRequired)
             {
-                lb_download.Items.Remove(item);
+                this.Invoke(new MethodInvoker(delegate
+                {
+                    BT_download.Enabled = enable;
+                }));
+            }
+            else
+            {
+                BT_download.Enabled = enable;
             }
         }
+
+        // Textbox output invoke
+        private void InvokeTBOutput(string output) {
+            if (TB_console.InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(delegate
+                {
+                    TB_console.Text = output;
+                }));
+            }
+            else
+            {
+                TB_console.Text = output;
+            }
+        }
+        #endregion
     }
 }

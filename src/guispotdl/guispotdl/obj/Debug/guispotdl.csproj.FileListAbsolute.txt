@@ -15,3 +15,4 @@ C:\Users\Etienne\Documents\GitHub\guispotdl\src\guispotdl\guispotdl\obj\Debug\gu
 C:\Users\Etienne\Documents\GitHub\guispotdl\src\guispotdl\guispotdl\obj\Debug\guispotdl.csproj.CoreCompileInputs.cache
 C:\Users\Etienne\Documents\GitHub\guispotdl\src\guispotdl\guispotdl\obj\Debug\guispotdl.exe
 C:\Users\Etienne\Documents\GitHub\guispotdl\src\guispotdl\guispotdl\obj\Debug\guispotdl.pdb
+C:\Users\Etienne\Documents\GitHub\guispotdl\src\guispotdl\guispotdl\obj\Debug\guispotdl.csprojResolveAssemblyReference.cache

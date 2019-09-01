@@ -28,27 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.bt_download = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.BT_download = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tb_id = new System.Windows.Forms.TextBox();
-            this.cb_type = new System.Windows.Forms.ComboBox();
-            this.lb_found = new System.Windows.Forms.ListBox();
-            this.lb_download = new System.Windows.Forms.ListBox();
-            this.bt_add = new System.Windows.Forms.Button();
-            this.bt_remove = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.CB_type = new System.Windows.Forms.ComboBox();
+            this.TB_console = new System.Windows.Forms.TextBox();
+            this.SS_status = new System.Windows.Forms.StatusStrip();
+            this.TSSL_status = new System.Windows.Forms.ToolStripStatusLabel();
+            this.SS_status.SuspendLayout();
             this.SuspendLayout();
             // 
-            // bt_download
+            // BT_download
             // 
-            this.bt_download.Enabled = false;
-            this.bt_download.Location = new System.Drawing.Point(742, 26);
-            this.bt_download.Name = "bt_download";
-            this.bt_download.Size = new System.Drawing.Size(90, 28);
-            this.bt_download.TabIndex = 0;
-            this.bt_download.Text = "Download";
-            this.bt_download.UseVisualStyleBackColor = true;
+            this.BT_download.Location = new System.Drawing.Point(617, 24);
+            this.BT_download.Name = "BT_download";
+            this.BT_download.Size = new System.Drawing.Size(90, 28);
+            this.BT_download.TabIndex = 0;
+            this.BT_download.Text = "Download";
+            this.BT_download.UseVisualStyleBackColor = true;
+            this.BT_download.Click += new System.EventHandler(this.BT_download_Click);
             // 
             // label1
             // 
@@ -66,103 +65,64 @@
             this.tb_id.Size = new System.Drawing.Size(420, 22);
             this.tb_id.TabIndex = 2;
             this.tb_id.Text = "3JrASLN8NI6jmnn6T8R0Nr";
-            this.tb_id.TextChanged += new System.EventHandler(this.tb_id_TextChanged);
             // 
-            // cb_type
+            // CB_type
             // 
-            this.cb_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_type.FormattingEnabled = true;
-            this.cb_type.Items.AddRange(new object[] {
+            this.CB_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CB_type.FormattingEnabled = true;
+            this.CB_type.Items.AddRange(new object[] {
             "Song",
             "Playlist"});
-            this.cb_type.Location = new System.Drawing.Point(477, 27);
-            this.cb_type.Name = "cb_type";
-            this.cb_type.Size = new System.Drawing.Size(259, 24);
-            this.cb_type.TabIndex = 3;
-            this.cb_type.SelectedIndexChanged += new System.EventHandler(this.cb_type_SelectedIndexChanged);
+            this.CB_type.Location = new System.Drawing.Point(477, 27);
+            this.CB_type.Name = "CB_type";
+            this.CB_type.Size = new System.Drawing.Size(134, 24);
+            this.CB_type.TabIndex = 3;
+            this.CB_type.SelectedIndexChanged += new System.EventHandler(this.CB_type_SelectedIndexChanged);
             // 
-            // lb_found
+            // TB_console
             // 
-            this.lb_found.FormattingEnabled = true;
-            this.lb_found.ItemHeight = 16;
-            this.lb_found.Items.AddRange(new object[] {
-            "a",
-            "b",
-            "c",
-            "d",
-            "d"});
-            this.lb_found.Location = new System.Drawing.Point(15, 100);
-            this.lb_found.Name = "lb_found";
-            this.lb_found.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lb_found.Size = new System.Drawing.Size(365, 292);
-            this.lb_found.TabIndex = 4;
+            this.TB_console.BackColor = System.Drawing.Color.Black;
+            this.TB_console.ForeColor = System.Drawing.Color.White;
+            this.TB_console.Location = new System.Drawing.Point(15, 67);
+            this.TB_console.Multiline = true;
+            this.TB_console.Name = "TB_console";
+            this.TB_console.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TB_console.Size = new System.Drawing.Size(692, 329);
+            this.TB_console.TabIndex = 4;
             // 
-            // lb_download
+            // SS_status
             // 
-            this.lb_download.FormattingEnabled = true;
-            this.lb_download.ItemHeight = 16;
-            this.lb_download.Location = new System.Drawing.Point(467, 100);
-            this.lb_download.Name = "lb_download";
-            this.lb_download.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lb_download.Size = new System.Drawing.Size(365, 292);
-            this.lb_download.TabIndex = 5;
+            this.SS_status.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.SS_status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSSL_status});
+            this.SS_status.Location = new System.Drawing.Point(0, 410);
+            this.SS_status.Name = "SS_status";
+            this.SS_status.Size = new System.Drawing.Size(723, 25);
+            this.SS_status.TabIndex = 5;
+            this.SS_status.Text = "statusStrip1";
             // 
-            // bt_add
+            // TSSL_status
             // 
-            this.bt_add.Location = new System.Drawing.Point(386, 216);
-            this.bt_add.Name = "bt_add";
-            this.bt_add.Size = new System.Drawing.Size(75, 23);
-            this.bt_add.TabIndex = 6;
-            this.bt_add.Text = ">";
-            this.bt_add.UseVisualStyleBackColor = true;
-            this.bt_add.Click += new System.EventHandler(this.bt_add_Click);
-            // 
-            // bt_remove
-            // 
-            this.bt_remove.Location = new System.Drawing.Point(386, 245);
-            this.bt_remove.Name = "bt_remove";
-            this.bt_remove.Size = new System.Drawing.Size(75, 23);
-            this.bt_remove.TabIndex = 7;
-            this.bt_remove.Text = "<";
-            this.bt_remove.UseVisualStyleBackColor = true;
-            this.bt_remove.Click += new System.EventHandler(this.bt_remove_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 80);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 17);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Sound found :";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(464, 80);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(137, 17);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Sound to download :";
+            this.TSSL_status.Name = "TSSL_status";
+            this.TSSL_status.Size = new System.Drawing.Size(97, 20);
+            this.TSSL_status.Text = "Status : ready";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 408);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.bt_remove);
-            this.Controls.Add(this.bt_add);
-            this.Controls.Add(this.lb_download);
-            this.Controls.Add(this.lb_found);
-            this.Controls.Add(this.cb_type);
+            this.ClientSize = new System.Drawing.Size(723, 435);
+            this.Controls.Add(this.SS_status);
+            this.Controls.Add(this.TB_console);
+            this.Controls.Add(this.CB_type);
             this.Controls.Add(this.tb_id);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.bt_download);
+            this.Controls.Add(this.BT_download);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Music downloader (Spotify)";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.SS_status.ResumeLayout(false);
+            this.SS_status.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,16 +130,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Button bt_download;
+        private System.Windows.Forms.Button BT_download;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tb_id;
-        private System.Windows.Forms.ComboBox cb_type;
-        private System.Windows.Forms.ListBox lb_found;
-        private System.Windows.Forms.ListBox lb_download;
-        private System.Windows.Forms.Button bt_add;
-        private System.Windows.Forms.Button bt_remove;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox CB_type;
+        private System.Windows.Forms.TextBox TB_console;
+        private System.Windows.Forms.StatusStrip SS_status;
+        private System.Windows.Forms.ToolStripStatusLabel TSSL_status;
     }
 }
 
