@@ -66,6 +66,7 @@
             this.tb_id.Size = new System.Drawing.Size(420, 22);
             this.tb_id.TabIndex = 2;
             this.tb_id.Text = "3JrASLN8NI6jmnn6T8R0Nr";
+            this.tb_id.TextChanged += new System.EventHandler(this.tb_id_TextChanged);
             // 
             // cb_type
             // 

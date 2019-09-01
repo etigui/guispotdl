@@ -13,6 +13,8 @@ namespace guispotdl
     public partial class Form1 : Form {
         public Form1() {
             InitializeComponent();
+
+            // Resize form and select first item in checkbox
             this.ClientSize = new Size(633, 60);
             cb_type.SelectedIndex = 0;
         }
@@ -22,6 +24,7 @@ namespace guispotdl
 
         }
 
+        // Change form size
         private void cb_type_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cb_type.Text == "Song")
@@ -35,6 +38,7 @@ namespace guispotdl
             }
         }
 
+        // Move song from found to download
         private void bt_add_Click(object sender, EventArgs e)
         {
             List<object> remove = new List<object>();
@@ -52,6 +56,7 @@ namespace guispotdl
             }
         }
 
+        // Move song from download to found
         private void bt_remove_Click(object sender, EventArgs e)
         {
             List<object> remove = new List<object>();

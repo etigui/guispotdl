@@ -6,3 +6,12 @@ C:\Users\Etienne\source\repos\guispotdl\guispotdl\obj\Debug\guispotdl.csproj.Gen
 C:\Users\Etienne\source\repos\guispotdl\guispotdl\obj\Debug\guispotdl.csproj.CoreCompileInputs.cache
 C:\Users\Etienne\source\repos\guispotdl\guispotdl\obj\Debug\guispotdl.exe
 C:\Users\Etienne\source\repos\guispotdl\guispotdl\obj\Debug\guispotdl.pdb
+C:\Users\Etienne\Documents\GitHub\guispotdl\src\guispotdl\guispotdl\bin\Debug\guispotdl.exe.config
+C:\Users\Etienne\Documents\GitHub\guispotdl\src\guispotdl\guispotdl\bin\Debug\guispotdl.exe
+C:\Users\Etienne\Documents\GitHub\guispotdl\src\guispotdl\guispotdl\bin\Debug\guispotdl.pdb
+C:\Users\Etienne\Documents\GitHub\guispotdl\src\guispotdl\guispotdl\obj\Debug\guispotdl.Form1.resources
+C:\Users\Etienne\Documents\GitHub\guispotdl\src\guispotdl\guispotdl\obj\Debug\guispotdl.Properties.Resources.resources
+C:\Users\Etienne\Documents\GitHub\guispotdl\src\guispotdl\guispotdl\obj\Debug\guispotdl.csproj.GenerateResource.Cache
+C:\Users\Etienne\Documents\GitHub\guispotdl\src\guispotdl\guispotdl\obj\Debug\guispotdl.csproj.CoreCompileInputs.cache
+C:\Users\Etienne\Documents\GitHub\guispotdl\src\guispotdl\guispotdl\obj\Debug\guispotdl.exe
+C:\Users\Etienne\Documents\GitHub\guispotdl\src\guispotdl\guispotdl\obj\Debug\guispotdl.pdb
