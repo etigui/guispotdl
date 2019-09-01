@@ -1,6 +1,6 @@
 # Spotify downloader
 
-![prog.png image](/images/prog.png)
+<p align="middle" ><img src="/images/prog.png" alt="App image" width="600"></p>
 
 # Download
 
