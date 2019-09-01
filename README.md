@@ -1,4 +1,4 @@
-# Spotify downloader
+# Spotify/Youtube downloader
 Downloads songs from YouTube in MP3 format by using Spotify's HTTP link.
 <p align="middle" ><img src="/images/prog.png" alt="App image" width="500"></p>
 
