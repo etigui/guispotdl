@@ -1,6 +1,6 @@
 # Spotify downloader
 Downloads songs from YouTube in MP3 format by using Spotify's HTTP link.
-<p align="middle" ><img src="/images/prog.png" alt="App image" width="400"></p>
+<p align="middle" ><img src="/images/prog.png" alt="App image" width="500"></p>
 
 # Download
 Download the new pre-release [here](https://github.com/etigui/guispotdl/releases). You must take the follwing program to make it works:
